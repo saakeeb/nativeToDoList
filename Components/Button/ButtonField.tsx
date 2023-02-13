@@ -1,13 +1,8 @@
 import React from 'react';
 import { Button } from "native-base";
+import { ButtonProps } from '../../AppProps';
 
-type ButtonProps = {
-    text: string;
-    colorScheme: string;
-    onClick: () => void;
-}
-
-const ButtonField = ({ text, colorScheme = 'primary', onClick }: ButtonProps) => {
+const ButtonField = ({ text, colorScheme = 'primary', onAddTask }: ButtonProps) => {
     return (
         <Button
             variant="ghost"
@@ -16,7 +11,7 @@ const ButtonField = ({ text, colorScheme = 'primary', onClick }: ButtonProps) =>
             borderRadius="50%"
             h='40px'
             w="40px"
-            onPress={() => onClick()}
+            onPress={() => onAddTask()}
         >
             {text}
         </Button>

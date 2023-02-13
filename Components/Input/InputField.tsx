@@ -1,14 +1,8 @@
 import React from 'react';
 import { Input } from "native-base";
-// import { InputProps } from '../../AppProps';
+import { InputProps } from '../../AppProps';
 
-type InputProps = {
-    placeHolder: string;
-    value: string;
-    onChange: (e: any) => void;
-}
-
-const InputField = ({ placeHolder, value, onChange }: InputProps) => {
+const InputField = ({ placeHolder, value, onInputChange }: InputProps) => {
     return (
         <Input
             bg='#fff'
@@ -18,7 +12,7 @@ const InputField = ({ placeHolder, value, onChange }: InputProps) => {
             placeholder={placeHolder}
             h='40px'
             value={value}
-            onChangeText={onChange}
+            onChangeText={onInputChange}
             // w="100%"
         />
     );

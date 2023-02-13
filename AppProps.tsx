@@ -1,6 +1,19 @@
 export type InputProps = {
     placeHolder: string;
     value: string;
-    task: string | undefined;
-    onChange: (e: string) => void;
+    onInputChange: (e: any) => void;
+}
+
+export type TasksProps = {
+    text: string;
+    onComplete: () => void;
+    onDelete: (e: number) => void;
+    index: number;
+    complete: boolean;
+}
+
+export type ButtonProps = {
+    text: string;
+    colorScheme: string;
+    onAddTask: () => void;
 }
