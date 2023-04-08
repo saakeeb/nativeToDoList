@@ -3,30 +3,36 @@ import { NativeBaseProvider, Box, Heading, View, HStack, ScrollView } from "nati
 import Tasks from "./Components/Tasks/Tasks";
 import InputField from "./Components/Input/InputField";
 import ButtonField from "./Components/Button/ButtonField";
+import { v4 as uuidv4 } from 'uuid';
+import { taskItemsProps } from "./AppProps";
 
-export default function App() {
+export default function App () {
   const [task, setTask] = useState<string>('');
-  const [complete, setComplete] = useState<boolean>(false);
-  const [taskItems, setTaskItems] = useState<string[]>([]);
+  const [taskItems, setTaskItems] = useState<taskItemsProps[]>([]);
 
   const handleInputChange = (text: string):void => {
     setTask(text);
   }
 
   const handleAddTask = ():void => {
-    setTaskItems([...taskItems, task]);
+    // setTaskItems([...taskItems, task]);
+    setTaskItems([...taskItems, { name: task, complete: false, id: uuidv4() }]);
     setTask('');
     // Keyboard.dismiss();
   }
 
-  const handleDelete = (index: number):void => {
+  const handleDelete = (index: string):void => {
     let completeTask = [...taskItems];
-    completeTask.splice(index, 1);
+    let indexNum = completeTask.findIndex(task => task.id === index);
+    completeTask.splice(indexNum, 1);
     setTaskItems(completeTask);
   }
 
-  const HandleComplete = (): void => {
-    complete ? setComplete(false) : setComplete(true);
+  const handleComplete = (index: string): void => {
+    let updatedTaskItems = [...taskItems];
+    const indexNum = updatedTaskItems.findIndex(task=> task.id === index);
+    updatedTaskItems[indexNum].complete = !updatedTaskItems[indexNum].complete;
+    setTaskItems(updatedTaskItems);
   }
 
   return (
@@ -40,15 +46,15 @@ export default function App() {
             {/* <Tasks text='Task 1' onClick={handleDelete} key={100} index={100} />
             <Tasks text='Task 2' onClick={handleDelete} key={200} index={200} /> */}
             {
-              taskItems.map((task, index) => {
+              taskItems.map((text) => {
                 return (
                   <Tasks
-                    key={index}
-                    text={task}
-                    onComplete={HandleComplete}
-                    index={index}
+                    key={text.id}
+                    text={text.name}
+                    onComplete={handleComplete}
+                    id={text.id}
                     onDelete={handleDelete}
-                    complete={complete}
+                    complete={text.complete}
                   />
                 )
               })

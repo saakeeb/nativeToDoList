@@ -6,9 +6,9 @@ export type InputProps = {
 
 export type TasksProps = {
     text: string;
-    onComplete: () => void;
-    onDelete: (e: number) => void;
-    index: number;
+    onComplete: (e: string) => void;
+    onDelete: (e: string) => void;
+    id: string;
     complete: boolean;
 }
 
@@ -16,4 +16,10 @@ export type ButtonProps = {
     text: string;
     colorScheme: string;
     onAddTask: () => void;
+}
+
+export type taskItemsProps = {
+    name: string;
+    complete: boolean;
+    id: string
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, HStack, Box, Card, Pressable } from "native-base";
 import { TasksProps } from "../../AppProps";
 
-const Tasks = ({ text, index, onDelete, complete, onComplete }: TasksProps) => {
+const Tasks = ({ text, id, onDelete, complete, onComplete }: TasksProps) => {
     return (
         <Card bg='white' px='10px' py="8px" marginBottom="12px">
             <HStack justifyContent='space-between' alignItems="center">
@@ -11,7 +11,7 @@ const Tasks = ({ text, index, onDelete, complete, onComplete }: TasksProps) => {
                             complete ?
                                 (
                                     <HStack justifyContent='center' alignItems="center">
-                                    <Pressable onPress={() => onComplete()}>
+                                    <Pressable onPress={() => onComplete(id)}>
                                             {({
                                                 isHovered,
                                                 isFocused,
@@ -31,7 +31,7 @@ const Tasks = ({ text, index, onDelete, complete, onComplete }: TasksProps) => {
                                 :
                                 (
                                     <HStack justifyContent='center' alignItems="center">
-                                    <Pressable onPress={() => onComplete()}>
+                                    <Pressable onPress={() => onComplete(id)}>
                                             {({
                                                 isHovered,
                                                 isFocused,
@@ -51,7 +51,7 @@ const Tasks = ({ text, index, onDelete, complete, onComplete }: TasksProps) => {
                         }
                 </View>
                 <View>
-                    <Pressable onPress={() => onDelete(index)}>
+                    <Pressable onPress={() => onDelete(id)}>
                         {({
                             isHovered,
                             isFocused,
